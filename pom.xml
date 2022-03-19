@@ -27,6 +27,30 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>com.fredhopper.environment</groupId>
+            <artifactId>environment-api</artifactId>
+            <version>0.7.5</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.dexmatech.styx</groupId>
+			<artifactId>environment</artifactId>
+			<version>1.0.22</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.wst.common</groupId>
+			<artifactId>environment</artifactId>
+			<version>1.0.200-v200705302225</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.ajchemist</groupId>
+			<artifactId>environment</artifactId>
+			<version>2022.7.43645</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -37,5 +61,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>clojars</id>
+			<name>Clojars</name>
+			<url>https://repo.clojars.org/</url>
+		</repository>
+	</repositories>
 
 </project>
