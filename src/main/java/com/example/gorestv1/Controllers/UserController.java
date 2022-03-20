@@ -4,11 +4,12 @@ import com.fredhopper.environment.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RestController("/api/user")
+@RequestMapping("/api/user")
 
 
 public class UserController {
@@ -19,7 +20,8 @@ public class UserController {
 
     @GetMapping("/token")
     public String getToken () {
-        return env.getProperty("GOREST_TOKEN");
+       // return env.getProperty("GOREST_TOKEN");
+        return env.getValue("GOREST_TOKEN");
     }
 
     @GetMapping("/{id}")
