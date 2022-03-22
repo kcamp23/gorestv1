@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserController {
 
     @Autowired
-   private Environment env;
+    Environment env;
     // /endpoint http://localhost:4444/api/user/token
 
     @GetMapping("/token")
