@@ -1,7 +1,23 @@
 package com.example.gorestv1.models;
 
-public class StocksModel {
+public class UserModel {
 
+    private int id;
+    private String name;
+    private String email;
+    private String gender;
+    private String status;
+
+    public UserModel(){
+
+        public UserModel(String name, String email,String gender, String status ){
+            this.name = name;
+            this.email = email;
+            this.gender = gender;
+            this.status = status;
+
+        }
+        
     public int getID(){return id;}
     public String getName(){return name;}
     public String getEmail(){return email;}

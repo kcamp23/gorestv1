@@ -29,4 +29,11 @@ public class UserController {
        String url = "https://gorest.co.in/public/v2/users/"+userId;
                return  restTemplate.getForObject(url, Object.class);
     }
+
+    {
+        try {
+            String url = "https://gorest.co.in/public/v2/users/" + userId;
+            String apiToken = env.getProperty(GO_REST_TOKEN);
+        }
+    }
 }
