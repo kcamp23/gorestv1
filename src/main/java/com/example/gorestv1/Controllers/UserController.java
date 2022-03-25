@@ -4,6 +4,7 @@ import com.example.gorestv1.models.UserModel;
 import com.fredhopper.environment.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -54,7 +55,30 @@ public Object deleteOneUser(
         RestTemplate restTemplate
 
             )}
-try {
-String url = ""
+try
+
+    {
+        String url = "https://gorest.co.in/public/v2/users/" + userId;
+        String token = env.getProperty("GO_REST_TOKEN");
+        url += "?access=token" + token;
+        restTemplate.delete(url);
+
+        return "successfully deleted";
+
+    }catch (HttpClientErrorException.NotFound exception )
+
+    {
+
+        return "user could not be deleted";
+    }catch HttpClientErrorException.Unauthorized exception)
+
+    {
+
+        return "you are not authorized";
+
+    }catch (Exception exception){
+    System.out.println(exception.getClass());
+    return exception.getMessage();
 }
 }
+
