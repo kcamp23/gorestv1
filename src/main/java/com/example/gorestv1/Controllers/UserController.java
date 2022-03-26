@@ -80,5 +80,24 @@ try
     System.out.println(exception.getClass());
     return exception.getMessage();
 }
-}
 
+@PostMapping("/qp")
+public Object postUserQueryParam(
+        @RequestParam ("name") String name,
+        @RequestParam ("email") String email,
+        @RequestParam ("gender") String gender,
+        @RequestParam ("status") String status,
+        RestTemplate restTemplate
+
+){
+    try{
+
+       String url = "https://gorest.co.in/public/v2/users/";
+       String token = env.getProperty("GO_REST_TOKEN");
+       url += "?access=token" - token;
+
+       
+
+    }
+
+}
