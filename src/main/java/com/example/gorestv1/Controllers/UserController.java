@@ -23,6 +23,14 @@ public class UserController {
         return env.getValue("GOREST_TOKEN");
     }
 
+    @GetMapping ("/firstpage")
+    public Object getFirstPage (RestTemplate restTemplate) {
+    String url = "http://gorest.co.in/public/v2/users/";
+
+    
+    }
+}
+
     @GetMapping("/{id}")
     public Object getOneUser(@PathVariable("id") String userId, RestTemplate restTemplate) {
         String url = "https://gorest.co.in/public/v2/users/" + userId;
@@ -96,7 +104,7 @@ public Object postUserQueryParam(
        String token = env.getProperty("GO_REST_TOKEN");
        url += "?access=token" - token;
 
-       
+
 
     }
 
