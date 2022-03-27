@@ -3,6 +3,7 @@ package com.example.gorestv1.Controllers;
 import com.example.gorestv1.models.UserModel;
 import com.fredhopper.environment.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -27,9 +28,9 @@ public class UserController {
     public Object getFirstPage (RestTemplate restTemplate) {
     String url = "http://gorest.co.in/public/v2/users/";
 
-    
-    }
-}
+        ResponseEntity<UserModel> firstPage = restTemplate.getForEntity(url, UserModel.class);
+
+
 
     @GetMapping("/{id}")
     public Object getOneUser(@PathVariable("id") String userId, RestTemplate restTemplate) {
@@ -88,16 +89,17 @@ try
     System.out.println(exception.getClass());
     return exception.getMessage();
 }
-
+    }
 @PostMapping("/qp")
 public Object postUserQueryParam(
         @RequestParam ("name") String name,
         @RequestParam ("email") String email,
         @RequestParam ("gender") String gender,
         @RequestParam ("status") String status,
-        RestTemplate restTemplate
+        RestTemplate restTemplate)
 
-){
+
+        {
     try{
 
        String url = "https://gorest.co.in/public/v2/users/";
@@ -109,3 +111,4 @@ public Object postUserQueryParam(
     }
 
 }
+    }
