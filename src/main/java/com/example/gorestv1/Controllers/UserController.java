@@ -3,10 +3,14 @@ package com.example.gorestv1.Controllers;
 import com.example.gorestv1.models.UserModel;
 import com.fredhopper.environment.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/user")
@@ -30,6 +34,15 @@ public class UserController {
 
         ResponseEntity<UserModel> firstPage = restTemplate.getForEntity(url, UserModel.class);
 
+        UserModel[] firstPageUsers = response.getBody();
+
+        HttpHeaders responseHeaders = response.getHeaders();
+
+        String totalPages = Objects.requireNonNull(responseHeaders.get("x=pagination=pages")).get(0);
+
+        System.out.println("total pages" + totalPages);
+
+        return new ResponseEntity<>(firstPageUsers, HttpStatus.ok);
 
 
     @GetMapping("/{id}")
