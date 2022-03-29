@@ -2,7 +2,9 @@ package com.example.gorestv1.Controllers;
 
 import com.example.gorestv1.models.UserModel;
 import com.fredhopper.environment.Environment;
+import org.eclipse.jetty.http.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,20 @@ public class UserController {
         // return env.getProperty("GOREST_TOKEN");
         return env.getValue("GOREST_TOKEN");
     }
+
+
+    @GetMapping ("/all")
+    public ResponseEntity getAll (
+            RestTemplate restTemplate
+    ){}
+
+        @GetMapping ("/page/{pageNum}")
+        public Object getPage (
+                RestTemplate restTemplate
+                @PathVariable ("pageNum") String pageNumber
+
+        ){}
+
 
     @GetMapping ("/firstpage")
     public Object getFirstPage (RestTemplate restTemplate) {
@@ -119,6 +135,35 @@ public Object postUserQueryParam(
        String token = env.getProperty("GO_REST_TOKEN");
        url += "?access=token" - token;
 
+
+       @PutMapping Mapping ("/")
+       public ResponseEntity putUser (
+               RestTemplate restTemplate,
+                @RequestBody UserModel upDateData
+                ){
+                    try {
+                        String url = "https://gorest.co.in/public/v2/users/" + updateData.getId();
+                        String token = env.getProperty("GO_REST_TOKEN");
+                        url += "?access-token" + token;
+
+                        HttpEntity<UserModel> request = new HttpEntity<>(updateData);
+
+                       ResponseEntity<UserModel> response =  restTemplate.exchange(
+                                url
+                                HttpMethod.PUT,
+                                request,
+                                UserModel.class
+                        );
+
+                       return new ResponseEntity(response, getBody(), HttpStatus.OK);
+
+                    }catch (Exception e){
+                        System.out.println(e.getClass() + "\n" + e.getMessage());
+                        return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+
+                    }
+        }
+                )
 
 
     }
