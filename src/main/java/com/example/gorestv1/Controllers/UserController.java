@@ -41,7 +41,7 @@ public class UserController {
                 RestTemplate restTemplate
                 @PathVariable ("pageNum") String pageNumber
 
-        ){}
+        )
 
 
     @GetMapping ("/firstpage")
@@ -125,48 +125,45 @@ public Object postUserQueryParam(
         @RequestParam ("email") String email,
         @RequestParam ("gender") String gender,
         @RequestParam ("status") String status,
-        RestTemplate restTemplate)
+        RestTemplate restTemplate) {
+    try {
+
+        String url = "https://gorest.co.in/public/v2/users/";
+        String token = env.getProperty("GO_REST_TOKEN");
+        url += "?access=token" - token;
 
 
-        {
-    try{
-
-       String url = "https://gorest.co.in/public/v2/users/";
-       String token = env.getProperty("GO_REST_TOKEN");
-       url += "?access=token" - token;
-
-
-       @PutMapping Mapping ("/")
-       public ResponseEntity putUser (
-               RestTemplate restTemplate,
+        @PutMapping Mapping("/")
+        public ResponseEntity putUser (
+                RestTemplate restTemplate,
                 @RequestBody UserModel upDateData
                 ){
-                    try {
-                        String url = "https://gorest.co.in/public/v2/users/" + updateData.getId();
-                        String token = env.getProperty("GO_REST_TOKEN");
-                        url += "?access-token" + token;
+            try {
+                String url = "https://gorest.co.in/public/v2/users/" + updateData.getId();
+                String token = env.getProperty("GO_REST_TOKEN");
+                url += "?access-token" + token;
 
-                        HttpEntity<UserModel> request = new HttpEntity<>(updateData);
+                HttpEntity<UserModel> request = new HttpEntity<>(updateData);
 
-                       ResponseEntity<UserModel> response =  restTemplate.exchange(
-                                url
-                                HttpMethod.PUT,
-                                request,
-                                UserModel.class
-                        );
+                ResponseEntity<UserModel> response = restTemplate.exchange(
+                        url
+                        HttpMethod.PUT,
+                        request,
+                        UserModel.class
+                );
 
-                       return new ResponseEntity(response, getBody(), HttpStatus.OK);
+                return new ResponseEntity(response, getBody(), HttpStatus.OK);
 
-                    }catch (Exception e){
-                        System.out.println(e.getClass() + "\n" + e.getMessage());
-                        return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            } catch (Exception e) {
+                System.out.println(e.getClass() + "\n" + e.getMessage());
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 
-                    }
+            }
         }
-                )
-
 
     }
 
 }
-    }
+
+        }
+
