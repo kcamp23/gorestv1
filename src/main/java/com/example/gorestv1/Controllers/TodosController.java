@@ -1,4 +1,4 @@
-package com.careerdevs.userrestapi.controllers;
+package com.example.gorestv1.Controllers;
 
 
 import com.careerdevs.userrestapi.models.PostModel;
